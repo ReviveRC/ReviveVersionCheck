@@ -1,0 +1,49 @@
+name: Publish Revive Client 1.2
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/release-client-1.2.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: revive-client-1.2
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download and verify the tested artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for version in 1.8.9 1.16.5 1.20.1 1.20.4 1.21 1.21.1 26.3; do
+            artifact="revive-${version}-1.2.jar"
+            curl --fail --location --retry 3 --output "${artifact}" \
+              "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/${artifact}"
+          done
+          for artifact in CHANGELOG-1.2.md SHA256SUMS-1.2.txt; do
+            curl --fail --location --retry 3 --output "${artifact}" \
+              "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/${artifact}"
+          done
+          sha256sum --check SHA256SUMS-1.2.txt
+      - name: Create the client release and upload all seven builds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view client-v1.2 --repo "${GITHUB_REPOSITORY}" --json isDraft --jq .isDraft > release-state.txt 2>/dev/null; then
+            test "$(cat release-state.txt)" = 'true'
+          else
+            gh release create client-v1.2 --repo "${GITHUB_REPOSITORY}" \
+              --target "${GITHUB_SHA}" --title 'Revive Client 1.2' \
+              --notes-file CHANGELOG-1.2.md --draft --latest=false
+          fi
+          gh release upload client-v1.2 --repo "${GITHUB_REPOSITORY}" \
+            revive-*-1.2.jar SHA256SUMS-1.2.txt --clobber
+          # Preserve the latest launcher release so the website's Windows EXE link keeps working.
+          gh release edit client-v1.2 --repo "${GITHUB_REPOSITORY}" --draft=false --latest=false

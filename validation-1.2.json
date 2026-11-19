@@ -1,0 +1,59 @@
+{
+  "release": "1.2",
+  "native_gameplay": {
+    "1.8.9": "PASS: all nine singleplayer features, six impacts, restoration and remote-entry isolation",
+    "1.16.5": "PASS: all nine singleplayer features, six impacts, restoration and remote-entry isolation",
+    "1.20.1": "PASS: all nine singleplayer features, six impacts, restoration and remote-entry isolation",
+    "1.20.4": "PASS: all nine singleplayer features, six impacts, restoration and remote-entry isolation",
+    "1.21": "Not run; user requested proceeding to release",
+    "1.21.1": "Not run; user requested proceeding to release",
+    "26.3": "PASS: all nine singleplayer features, six impacts, restoration and remote-entry isolation"
+  },
+  "jar_integrity": "passed",
+  "shared_checks": "passed",
+  "remote_entry_check": "Simulated loss of integrated-server access; no live remote-server test",
+  "artifacts": {
+    "1.8.9": {
+      "file": "revive-1.8.9-1.2.jar",
+      "sha256": "3152f4a0883d5faa1f79c8b963a753709f99a42f59d5aa1abbb062f30581c466",
+      "git_blob_sha": "485cc5cfa1ff080140045964a899639dc0ebe766",
+      "size": 1274102
+    },
+    "1.16.5": {
+      "file": "revive-1.16.5-1.2.jar",
+      "sha256": "9ab0c490558776e80d7e9a45e0d11bc670f5f82f363fabdcd302fcd88dbc66a9",
+      "git_blob_sha": "70cf8ef476518def2bc8fe79253a1c43afc85b6f",
+      "size": 1283796
+    },
+    "1.20.1": {
+      "file": "revive-1.20.1-1.2.jar",
+      "sha256": "ae3ac21d992a0c7cb9c80e0db24b3e3e1f928a8a26a5a357f885c09a6373c967",
+      "git_blob_sha": "11e809eefb7c2d35d1e390f9df9481a73f6b4cc2",
+      "size": 1284655
+    },
+    "1.20.4": {
+      "file": "revive-1.20.4-1.2.jar",
+      "sha256": "b9d30a93cfe550a20240e274ed4da7ccc442f160b89826edd1974bc90d42130e",
+      "git_blob_sha": "e75116f044f577a659b825683227b03819258d26",
+      "size": 1284914
+    },
+    "1.21": {
+      "file": "revive-1.21-1.2.jar",
+      "sha256": "af67afa713a8af1c9345576b69679f9dacf8becb5f495a7a5aa4b741fc7fc499",
+      "git_blob_sha": "5877f2cf9f5c57f8fcadd38272822fc337edd0b1",
+      "size": 1285007
+    },
+    "1.21.1": {
+      "file": "revive-1.21.1-1.2.jar",
+      "sha256": "d7214b85d197bc894b29440cc1c30af6ba2074680aa0ccef79089c1f06e57da3",
+      "git_blob_sha": "35e5fcf2529be6a6ff033516b7d6b077c2de642d",
+      "size": 1285009
+    },
+    "26.3": {
+      "file": "revive-26.3-1.2.jar",
+      "sha256": "3600dd057eba94ddd5af3d38a0e8adf020481ac2c96e136a132b84a9b804e5c5",
+      "git_blob_sha": "dd9baa231d123db58bf3f36bee91632e4850c126",
+      "size": 1268420
+    }
+  }
+}
