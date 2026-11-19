@@ -22,12 +22,12 @@ jobs:
           set -euo pipefail
           for version in 1.8.9 1.16.5 1.20.1 1.20.4 1.21 1.21.1 26.3; do
             artifact="revive-${version}-1.1.jar"
-            gh api "repos/${GITHUB_REPOSITORY}/contents/${artifact}?ref=${GITHUB_SHA}" \
-              -H 'Accept: application/vnd.github.raw+json' > "${artifact}"
+            curl --fail --location --retry 3 --output "${artifact}" \
+              "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/${artifact}"
           done
           for artifact in CHANGELOG-1.1.md SHA256SUMS-1.1.txt; do
-            gh api "repos/${GITHUB_REPOSITORY}/contents/${artifact}?ref=${GITHUB_SHA}" \
-              -H 'Accept: application/vnd.github.raw+json' > "${artifact}"
+            curl --fail --location --retry 3 --output "${artifact}" \
+              "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/${artifact}"
           done
           sha256sum --check SHA256SUMS-1.1.txt
       - name: Create the client release and upload all seven builds
